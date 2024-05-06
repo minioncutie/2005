@@ -12,3 +12,5 @@ stem(n,c,'filled');grid on;title('2*i[n-4]');
 subplot(2,2,4);xlabel('n(samples)');ylabel('Amplitude(V)');
 stem(n,A,'filled');grid on;title('x[n]=i[n]-2*i[n-4]');
 sgtitle('Generation of Sequences');
+
+
