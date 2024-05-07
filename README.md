@@ -465,3 +465,900 @@ title('Decimated sequence');
 xlabel('k');
 ylabel('Amplitude')
 
+clc
+clear all
+close all
+fs=input('Enter the sampling frequency:');
+
+2018105013
+Benita .D
+56
+
+t=0:1/fs:10;
+f1=input('f1:');
+f2=input('f2:');
+f3=input('f3:');
+x=sin(2*pi*f1*t)+sin(2*pi*f2*t)+sin(2*pi*f3*t);
+disp('1.Butterworth 2.Chebyshev');
+sw1=input('Select filter:');
+switch sw1
+case 1
+rp=input('Enter passband ripple:');
+rs=input('Enter stopband ripple:');
+wp=input('Enter the passband frequency:');
+ws=input('Enter the stopband frequency:');
+w1=(2*wp)/fs; w2=(2*ws)/fs;
+[N,wn]=buttord(w1,w2,rp,rs);
+[b,a]=butter(N,wn,'low');
+disp(N);disp(wn);disp(b);disp(a);
+y=filtfilt(b,a,x);
+X=fft(x);
+Y=fft(y);
+m1=abs(X);
+m2=abs(Y);
+subplot(121);
+w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);title('Magnitude spectrum of input signal');
+xlabel('Frequency(Hz)');ylabel('Gain(db)');
+subplot(122);
+w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2); title('Magitude spectrum of output signal');
+xlabel(' Frequency(Hz)'); ylabel('Gain(db)');
+figure();
+freqz(b,a);
+case 2
+rp=input('Enter passband ripple:');
+rs=input('Enter stopband ripple');
+wp = input('Enter the passband frequency');
+ws=input('Enter the stopband frequency');
+w1=(2*wp)/fs; w2=(2*ws)/fs;
+[N,wn]=cheb1ord(w1,w2,rp,rs);
+[b,a]=cheby1(N,rp,wn,'low');
+disp(N);disp(wn);disp(b);disp(a);
+y=filtfilt(b,a,x);
+X=fft(x);
+Y=fft(y);
+m1=abs(X);
+m2=abs(Y);
+subplot(121);
+w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);title('Magnitude spectrum of input signal');
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+subplot(122);
+
+2018105013
+Benita .D
+57
+
+w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2); title('Magnitude spectrum of Output signal');
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+figure();
+freqz(b,a);
+end
+
+%EXP 9.2 Design of high pass filTER
+clc
+clear all
+close all
+fs=input('Enter the sampling frequency:');
+t=0:1/fs:10;
+f1=input('f1:');
+f2=input('f2:');
+f3=input('f3:');
+x=sin(2*pi*f1*t)+sin(2*pi*f2*t)+sin(2*pi*f3*t);
+disp('1.Butterworth 2.Chebyshev');
+sw1=input('Select filter:');
+switch sw1
+case 1
+rp=input('Enter passband ripple');
+rs=input('Enter stopband ripple');
+wp=input('Enter the passband frequency');
+ws=input('Enter the stopband frequency');
+w1=(2*wp)/fs; w2=(2*ws)/fs;
+[N,wn]=buttord(w1,w2,rp,rs);
+[b,a]=butter(N,wn,'high');
+disp(N);disp(wn);disp(b);disp(a);
+y=filtfilt(b,a,x);
+X=fft(x);
+Y=fft(y);
+m1=abs(X);
+m2=abs(Y);
+subplot(121);
+w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);title('Input Magnitude spectrum');
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+subplot(122);
+w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2); title('Output Magnitude spectrum’);
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+figure();
+freqz(b,a);
+
+2018105013
+Benita .D
+58
+
+case 2
+rp=input('Enter the passband ripple:');
+rs=input('Enter stopband ripple:');
+wp=input('Enter the passband frequency:');
+ws=input('Enter the stopband frequency:');
+w1=(2*wp)/fs; w2=(2*ws)/fs;
+[N,wn]=cheb1ord(w1,w2,rp,rs);
+[b,a]=cheby1(N,rp,wn,'high');
+disp(N);disp(wn);disp(b);disp(a);
+y=filtfilt(b,a,x);
+X=fft(x);
+Y=fft(y);
+m1=abs(X);
+m2=abs(Y);
+subplot(121);
+w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);title('Magnitude spectrum of input signal');
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+subplot(122);
+w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2); title('Magnitude spectrum of output signal’);
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+figure();
+freqz(b,a);
+end
+
+%EXP 9.2 Design of high pass filTER
+clc
+clear all
+close all
+fs=input('Enter the sampling frequency:');
+t=0:1/fs:10;
+f1=input('f1:');
+f2=input('f2:');
+f3=input('f3:');
+x=sin(2*pi*f1*t)+sin(2*pi*f2*t)+sin(2*pi*f3*t);
+disp('1.Butterworth 2.Chebyshev');
+sw1=input('Select filter:');
+switch sw1
+case 1
+rp=input('Enter passband ripple');
+rs=input('Enter stopband ripple');
+wp=input('Enter the passband frequency');
+ws=input('Enter the stopband frequency');
+w1=(2*wp)/fs; w2=(2*ws)/fs;
+[N,wn]=buttord(w1,w2,rp,rs);
+[b,a]=butter(N,wn,'high');
+disp(N);disp(wn);disp(b);disp(a);
+y=filtfilt(b,a,x);
+X=fft(x);
+Y=fft(y);
+m1=abs(X);
+m2=abs(Y);
+subplot(121);
+w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);title('Input Magnitude spectrum');
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+subplot(122);
+w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2); title('Output Magnitude spectrum’);
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+figure();
+freqz(b,a);
+
+2018105013
+Benita .D
+58
+
+case 2
+rp=input('Enter the passband ripple:');
+rs=input('Enter stopband ripple:');
+wp=input('Enter the passband frequency:');
+ws=input('Enter the stopband frequency:');
+w1=(2*wp)/fs; w2=(2*ws)/fs;
+[N,wn]=cheb1ord(w1,w2,rp,rs);
+[b,a]=cheby1(N,rp,wn,'high');
+disp(N);disp(wn);disp(b);disp(a);
+y=filtfilt(b,a,x);
+X=fft(x);
+Y=fft(y);
+m1=abs(X);
+m2=abs(Y);
+subplot(121);
+w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);title('Magnitude spectrum of input signal');
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+subplot(122);
+w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2); title('Magnitude spectrum of output signal’);
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+figure();
+freqz(b,a);
+end
+
+(BANDSTOP FILTER)
+clc
+clear all
+close all
+fs=input('Enter the sampling frequency');
+t=0:1/fs:10;
+f1=input('f1');
+f2=input('f2');
+f3=input('f3');
+x=sin(2*pi*f1*t)+sin(2*pi*f2*t)+sin(2*pi*f3*t);
+disp('1.Butterworth 2.Chebyshev');
+sw1=input('Select filter');
+switch sw1
+case 1
+rp=input('Enter passband ripple:');
+rs=input('Enter stopband ripple:');
+f1=input('Enter the first stopband frequency:');
+fL=input('Enter the first passband frequency:');
+fU=input('Enter the second stopband frequency:');
+f2=input('Enter the second passband frequency:');
+w1=[(2*f1)/fs, (2*fU)/fs];
+w2=[(2*fL)/fs, (2*f2)/fs];
+[N,wn]=buttord(w1,w2,rp,rs);
+[b,a]=butter(N,wn,'stop');
+disp(N);disp(wn);disp(b);disp(a);
+y=filtfilt(b,a,x);
+X=fft(x);
+Y=fft(y);
+m1=abs(X);
+m2=abs(Y);
+subplot(211);
+w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);title('Input Magnitude spectrum');
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+subplot(212);
+w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2); title('Output Magnitude spectrum');
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+figure();
+freqz(b,a);
+case 2
+rp=input('Enter passband ripple:');
+rs=input('Enter stopband ripple:');
+f1=input('Enter the first stopband frequency:');
+fL=input('Enter the first passband frequency:');
+fU=input('Enter the second stopband frequency:');
+f2=input('Enter the second passband frequency:');
+
+2018105013
+Benita .D
+61
+
+w1=[(2*f1)/fs, (2*fU)/fs];
+w2=[(2*fL)/fs, (2*f2)/fs];
+[N,wn]=cheb1ord(w1,w2,rp,rs);
+[b,a]=cheby1(N,rp,wn,'stop');
+disp(N);disp(wn);disp(b);disp(a);
+y=filtfilt(b,a,x);
+X=fft(x);
+Y=fft(y);
+m1=abs(X);
+m2=abs(Y);
+subplot(211);
+w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);title('Input Magnitude spectrum');
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+subplot(212);
+w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2); title('Output Magnitude spectrum');
+xlabel(' Frequency(Hz)');ylabel('Gain(db)');
+figure();
+freqz(b,a);
+end
+
+Design of lowpass FIR filter
+clc;
+close all;
+clear all;
+fs=input('Enter the sampling frequency');
+t=0:1/fs:10;
+f1=input('Enter frequency 1:');
+f2=input('Enter frequency 2:');
+f3=input('Enter frequency 3:');
+x=sin(2*pi*f1*t)+sin(2*pi*f2*t)+sin(2*pi*f3*t);
+
+2018105013
+Benita .D
+70
+
+disp('1.Blackman 2.Hanning 3.Hamming 4.Rectangular');
+op=input('Select Window type:');
+switch op
+case 1
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2))==0
+N1=N;
+N=N-1;
+end
+y=blackman(N1);
+wp=input('Enter the cutoff frequency:');
+w0=(2*wp)/fs;
+b=fir1(N,w0,'low',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(211);w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);xlabel('Frequency(Hz)');
+ylabel('Gain(dB)');title('Magnitude spectrum of input signal');
+subplot(212);w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2);xlabel('Frequency(Hz)');
+ylabel('Gain(dB)');title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 2
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2))==0
+N1=N;
+N=N-1;
+end
+y=hanning(N1);
+wp=input('Enter the cutoff frequency:');
+w0=(2*wp)/fs;
+b=fir1(N,w0,'low',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(211);w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);xlabel('Frequency(Hz)');
+ylabel('Gain(dB)');title('Magnitude spectrum of input signal');
+subplot(212);w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+
+2018105013
+Benita .D
+71
+
+stem(w3,m2);xlabel('Frequency(Hz)');
+ylabel('Gain(dB)');title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 3
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2))==0
+N1=N;
+N=N-1;
+end
+y=hamming(N1);
+wp=input('Enter the cutoff frequency:');
+w0=(2*wp)/fs;
+b=fir1(N,w0,'low',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(211);w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);xlabel('Frequency(Hz)');
+ylabel('Gain(dB)');title('Magnitude spectrum of input signal');
+subplot(212);w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2);xlabel('Frequency(Hz)');
+ylabel('Gain(dB)');title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 4
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2))==0
+N1=N;
+N=N-1;
+end
+y=rectwin(N1);
+wp=input('Enter the cutoff frequency:');
+w0=(2*wp)/fs;
+b=fir1(N,w0,'low',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(211);w0=[(0:length(m1)-1)/(length(m1)-1)]*fs;
+stem(w0,m1);xlabel('Frequency(Hz)');
+ylabel('Gain(dB)');title('Magnitude spectrum of input signal');
+
+2018105013
+Benita .D
+72
+
+subplot(212);w3=[(0:length(m2)-1)/(length(m2)-1)]*fs;
+stem(w3,m2);xlabel('Frequency(Hz)');
+ylabel('Gain(dB)');title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+end
+
+(HIGHPASS FILTER)
+clc;
+clear all;
+close all;
+fs=input('Enter sampling frequency');
+t=0:1/fs:10;
+f1=input('Enter the first frequency of input signal');
+f2=input('Enter the second frequency of input signal');
+f3=input('Enter the third frequency of input signal');
+x=sin(2*pi*f1*t)+sin(2*pi*f2*t)+sin(2*pi*f3*t);
+disp('1.Blackman 2.Hanning 3.Hamming 4.Rectangular');
+in=input('Enter choice:');
+switch in
+case 1
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=blackman(N1);
+wp=input('Enter cutoff frequency');
+wc=(2.*wp)/fs;
+b=fir1(N,wc,'high',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+
+2018105013
+Benita .D
+73
+
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 2
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=hanning(N1);
+wp=input('Enter cutoff frequency');
+wc=(2.*wp)/fs;
+b=fir1(N,wc,'high',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 3
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=hamming(N1);
+wp=input('Enter cutoff frequency');
+wc=(2.*wp)/fs;
+b=fir1(N,wc,'high',y);
+w=0:(pi/100):pi;
+
+2018105013
+Benita .D
+74
+
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 4
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=rectwin(N1);
+wp=input('Enter cutoff frequency');
+wc=(2.*wp)/fs;
+b=fir1(N,wc,'high',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of filtered signal');
+figure();
+
+2018105013
+Benita .D
+75
+
+freqz(b);
+
+(BANDPASS FILTER)
+clc;
+clear all;
+close all;
+fs=input('Enter sampling frequency');
+t=0:1/fs:10;
+f1=input('Enter the first frequency of input signal');
+f2=input('Enter the second frequency of input signal');
+f3=input('Enter the third frequency of input signal');
+x=sin(2*pi*f1*t)+sin(2*pi*f2*t)+sin(2*pi*f3*t);
+disp('1.Blackman 2.Hanning 3.Hamming 4.Rectangular');
+in=input('Enter choice:');
+switch in
+case 1
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=blackman(N1);
+wp1=input('Enter first cutoff frequency');
+wp2=input('Enter Second cutoff frequency')
+wc=[(2.*wp1)/fs (2.*wp2)/fs];
+b=fir1(N,wc,'bandpass',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+
+2018105013
+Benita .D
+76
+
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 2
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=hanning(N1);
+wp1=input('Enter first cutoff frequency');
+wp2=input('Enter Second cutoff frequency')
+wc=[(2.*wp1)/fs (2.*wp2)/fs];
+b=fir1(N,wc,'bandpass',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 3
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=hamming(N1);
+wp1=input('Enter first cutoff frequency');
+wp2=input('Enter Second cutoff frequency')
+wc=[(2.*wp1)/fs (2.*wp2)/fs];
+b=fir1(N,wc,'bandpass',y);
+
+2018105013
+Benita .D
+77
+
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 4
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=rectwin(N1);
+wp1=input('Enter first cutoff frequency');
+wp2=input('Enter Second cutoff frequency')
+wc=[(2.*wp1)/fs (2.*wp2)/fs];
+b=fir1(N,wc,'bandpass',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+
+2018105013
+Benita .D
+78
+
+title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+end
+
+(BANDSTOP FILTER)
+clc;
+clear all;
+close all;
+fs=input('Enter sampling frequency');
+t=0:1/fs:10;
+f1=input('Enter the first frequency of input signal');
+f2=input('Enter the second frequency of input signal');
+f3=input('Enter the third frequency of input signal');
+x=sin(2*pi*f1*t)+sin(2*pi*f2*t)+sin(2*pi*f3*t);
+disp('1.Blackman 2.Hanning 3.Hamming 4.Rectangular');
+in=input('Enter choice:');
+switch in
+case 1
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=blackman(N1);
+wp1=input('Enter first cutoff frequency');
+wp2=input('Enter Second cutoff frequency');
+wc=[(2.*wp1)/fs (2.*wp2)/fs];
+b=fir1(N,wc,'stop',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+
+2018105013
+Benita .D
+79
+
+title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 2
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=hanning(N1);
+wp1=input('Enter first cutoff frequency');
+wp2=input('Enter Second cutoff frequency')
+wc=[(2.*wp1)/fs (2.*wp2)/fs];
+b=fir1(N,wc,'stop',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 3
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=hamming(N1);
+wp1=input('Enter first cutoff frequency');
+wp2=input('Enter Second cutoff frequency')
+wc=[(2.*wp1)/fs (2.*wp2)/fs];
+b=fir1(N,wc,'stop',y);
+w=0:(pi/100):pi;
+X=fft(x);
+
+2018105013
+Benita .D
+80
+
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of filtered signal');
+figure();
+freqz(b);
+case 4
+N=input('Enter the order of the filter:');
+N1=N+1;
+if(rem(N,2)~=0)
+N1=N;
+N=N-1;
+end
+y=rectwin(N1);
+wp1=input('Enter first cutoff frequency');
+wp2=input('Enter Second cutoff frequency')
+wc=[(2.*wp1)/fs (2.*wp2)/fs];
+b=fir1(N,wc,'stop',y);
+w=0:(pi/100):pi;
+X=fft(x);
+z=filter(b,1,x);
+disp(b);
+Z=fft(z);
+m1=abs(X);
+m2=abs(Z);
+subplot(121);
+w0=[(0:length(m1)-1)/length(m1)-1]*fs;
+stem(w0,m1);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of input signal');
+subplot(122);
+w3=[(0:length(m2)-1)/length(m2)-1]*fs;
+stem(w3,m2);
+xlabel('Frequency');
+ylabel('Gain(dB)');
+title('Magnitude spectrum of filtered signal');
+figure();
+
+2018105013
+Benita .D
+81
+
+freqz(b);
+end
+
